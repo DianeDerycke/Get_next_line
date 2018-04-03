@@ -5,14 +5,19 @@ int		main(int argc, char **argv)
 	char	*line;
 	int		fd;
 	int		i;
+	// int		j;
 
 	// i = 0;
+	// j = 0;
 
-	// while (i != 117718)
+	// while (i != 240000)
 	// {
-	// 	write(1, &i, 1);
-	// 	write(1, "\n", 1);
+	// 	if (j == 9)
+	// 		j = 0;
+	// 	ft_putnbr(j);
+	// 	ft_putchar('\n');
 	// 	i++;
+	// 	j++;
 	// }
 
 
@@ -23,6 +28,7 @@ int		main(int argc, char **argv)
 	while((i = get_next_line(fd, &line)) > 0)
 	{
 		printf("%s\n", line);
+		printf("%s%d\n","VALUE I =====> ", i );
 		free(line);
 	}
 	return (0);

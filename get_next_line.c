@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dideryck <dideryck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:47:16 by dideryck          #+#    #+#             */
-/*   Updated: 2018/04/03 16:33:47 by dideryck         ###   ########.fr       */
+/*   Updated: 2018/04/03 18:41:44 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,15 @@ int				get_next_line(const int fd, char **line)
 	static char		*tmp;
 	char			*newtmp;
 	int				i;
-	char			*test;
 
-	test = NULL;
 	i = 1;
-	if (!line || fd < 0)
-		return (-1);
 	while (i)
 	{
-		i = read(fd, buffer, BUFF_SIZE);
-		if (i < 0)
+		if (!line || fd < 0 || (i = read(fd, buffer, BUFF_SIZE)) < 0)
 			return (-1);
 		buffer[i] = '\0';
+		if (tmp && ft_strchr(tmp, '\n'))
+			break ;
 		if (!tmp)
 			tmp = ft_strdup(buffer);
 		else
@@ -56,13 +53,6 @@ int				get_next_line(const int fd, char **line)
 			ft_strdel(&tmp);
 			tmp = newtmp;
 		}
-		if ((test = ft_strchr(tmp, '\n')))
-		{
-			printf("%s%s\n","strchr =", test);
-			break ;
-		}
-		// printf("%s%s\n","strchr =", test);
-
 	}
 	ft_build_line(&tmp, line, &newtmp);
 	return (i > 0 || tmp || **line ? 1 : 0);

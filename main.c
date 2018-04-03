@@ -5,7 +5,6 @@ int		main(int argc, char **argv)
 	char	*line;
 	int		fd;
 	int		i;
-	// int		j;
 
 	// i = 0;
 	// j = 0;
@@ -28,8 +27,12 @@ int		main(int argc, char **argv)
 	while((i = get_next_line(fd, &line)) > 0)
 	{
 		printf("%s\n", line);
-		printf("%s%d\n","VALUE I =====> ", i );
+		// printf("%s%d\n", "VALUE MAIN I ===>", i);
 		free(line);
 	}
+		// printf("%s\n"	, line);
+
+	// printf("%s%d\n","VALUE I X 2 =====> ", i );
+	// printf("%s%d\n","FD ====>", fd );
 	return (0);
 }

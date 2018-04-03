@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:47:16 by dideryck          #+#    #+#             */
-/*   Updated: 2018/04/03 18:41:44 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/04 00:12:51 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void		ft_build_line(char **tmp, char **line, char **newtmp)
 	i = 0;
 	while ((*tmp)[i] && (*tmp)[i] != '\n')
 		i++;
+	// printf("%d\n", i);
 	if (i)
 		*line = ft_strndup(*tmp, i);
 	else
@@ -40,9 +41,11 @@ int				get_next_line(const int fd, char **line)
 	i = 1;
 	while (i)
 	{
-		if (!line || fd < 0 || (i = read(fd, buffer, BUFF_SIZE)) < 0)
+		if (!line || fd < 0 || ((i = read(fd, buffer, BUFF_SIZE)) < 0))
 			return (-1);
-		buffer[i] = '\0';
+		if (i)
+			buffer[i] = '\0';
+
 		if (tmp && ft_strchr(tmp, '\n'))
 			break ;
 		if (!tmp)
@@ -50,10 +53,11 @@ int				get_next_line(const int fd, char **line)
 		else
 		{
 			newtmp = ft_strjoin(tmp, buffer);
+			buffer[0] = (i == 0 ? '\0' : 0);
 			ft_strdel(&tmp);
 			tmp = newtmp;
 		}
 	}
 	ft_build_line(&tmp, line, &newtmp);
-	return (i > 0 || tmp || **line ? 1 : 0);
+	return (buffer[0] ? 1 : 0);
 }

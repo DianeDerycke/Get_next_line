@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_copyuntil.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 16:18:12 by DERYCKE           #+#    #+#             */
-/*   Updated: 2018/04/06 16:22:16 by DERYCKE          ###   ########.fr       */
+/*   Created: 2018/04/06 15:05:37 by DERYCKE           #+#    #+#             */
+/*   Updated: 2018/04/06 15:06:25 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 50000
+#include "libft.h"
 
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include "libft/libft.h"
-# include <fcntl.h>
-# include <stdio.h>
+int			ft_copyuntil(char **dst, char *src, char c)
+{
+	int		i;
+	int		count;
+	int		pos;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = -1;
+	count = 0;
+	while (src[++i])
+		if (src[i] == c)
+			break ;
+	pos = i;
+	if (!(*dst = ft_strnew(i)))
+		return (0);
+	while (src[count] && count < i)
+	{
+		if (!(*dst = ft_strjoinch(*dst, src[count])))
+			return (0);
+		count++;
+	}
+	return (pos);
+}

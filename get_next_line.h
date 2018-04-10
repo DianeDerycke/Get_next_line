@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:18:12 by DERYCKE           #+#    #+#             */
-/*   Updated: 2018/04/10 14:37:29 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:55:03 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 typedef struct		s_pos
 {
 	int					fd;
+	int					i;
+	int					ret;
+	char				buffer[BUFF_SIZE + 1];
 	char				*rest;
 	struct s_pos		*next;
 }					t_pos;

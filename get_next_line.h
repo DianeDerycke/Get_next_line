@@ -6,13 +6,13 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:18:12 by DERYCKE           #+#    #+#             */
-/*   Updated: 2018/04/10 14:55:03 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 18:30:52 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 5
+# define BUFF_SIZE 1
 
 # include <string.h>
 # include <unistd.h>

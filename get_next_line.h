@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:18:12 by DERYCKE           #+#    #+#             */
-/*   Updated: 2018/04/09 17:49:30 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:27:37 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
+
+typedef struct		s_pos
+{
+	int					fd;
+	char				*rest;
+	struct s_pos		*next;
+}					t_pos;
 
 int		get_next_line(const int fd, char **line);
 

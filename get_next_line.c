@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:47:16 by dideryck          #+#    #+#             */
-/*   Updated: 2018/04/09 17:56:06 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:29:23 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 static void		create_line(char **rest, char **line)
 {
 	char	*tmp;
-	// int		i;
 	int		j;
 
 	tmp = NULL;
-	// i = 0;
 	j = 0;
-	// while ((*rest)[i] && (*rest)[i] == '\n')
-	//  	i++;
-	// j = i;
 	while ((*rest)[j] && (*rest)[j] != '\n')
 		j++;
 	*line = ft_strndup(*rest, j);
@@ -38,16 +33,17 @@ static void		create_line(char **rest, char **line)
 	}
 	else
 	{
-		ft_strdel(rest);
+		free(*rest);
 		*rest = ft_strdup("");
 	}
 }
 
-static void		add_buffer_to_rest(char **rest, char buffer[])
+static void		add_buffer_to_rest(char **rest, char buffer[], int ret)
 {
 	char	*tmp;
 
 	tmp = NULL;
+	buffer[ret] = '\0';
 	if (!(*rest))
 		*rest = ft_strdup(buffer);
 	else
@@ -61,26 +57,29 @@ static void		add_buffer_to_rest(char **rest, char buffer[])
 
 int		get_next_line(const int fd, char **line)
 {
-	char		buffer[BUFF_SIZE + 1];
-	static char		*rest = NULL;
-	int			i;
-	int			ret;
+	char				buffer[BUFF_SIZE + 1];
+	static t_pos		pos;
+	int					ret;
 
-	i = 0;
+	ret = 0;
 	if (fd < 0 || !line || read(fd, buffer, 0) < 0)
 		return (-1);
-	*line = NULL;
+	if (!(pos.fd))
+		pos.fd = fd;
+	if (pos.fd != fd)
+	{
+		ft_strdel(&(pos.rest));
+		pos.rest = NULL;
+		pos.fd = fd;
+	}
 	while ((ret = read(fd, buffer, BUFF_SIZE)))
 	{
-		buffer[ret] = '\0';
-		add_buffer_to_rest(&rest, buffer);
-		if (rest && ft_strchr(rest + i,'\n'))
+		add_buffer_to_rest(&(pos.rest), buffer, ret);
+		if (pos.rest && ft_strchr(pos.rest,'\n'))
 			break;
-		else
-			i += ret;
 	}
-	if (ret < BUFF_SIZE && !(ft_strlen(rest)))
+	if (ret < BUFF_SIZE && !(ft_strlen(pos.rest)))
 		return (0);
-	 create_line(&rest, line);
+	 create_line(&(pos.rest), line);
 	return (1);
 }

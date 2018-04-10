@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 15:47:20 by DERYCKE           #+#    #+#             */
-/*   Updated: 2018/04/09 17:44:10 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:10:59 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ int		main(int argc, char **argv)
 	while((i = get_next_line(fd, &line)) > 0)
 	{
 		printf("%s\n", line);
-		printf("%d\n", i);		
-		// printf("PASSAGE = %d\n", count);
-		// count++;
 		free(line);
 	}
 	return (0);

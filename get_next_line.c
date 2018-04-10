@@ -6,7 +6,7 @@
 /*   By: DERYCKE <DERYCKE@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:47:16 by dideryck          #+#    #+#             */
-/*   Updated: 2018/04/10 14:29:23 by DERYCKE          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:44:15 by DERYCKE          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		get_next_line(const int fd, char **line)
 	if (pos.fd != fd)
 	{
 		ft_strdel(&(pos.rest));
-		pos.rest = NULL;
 		pos.fd = fd;
 	}
 	while ((ret = read(fd, buffer, BUFF_SIZE)))
